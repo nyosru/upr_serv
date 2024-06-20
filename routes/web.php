@@ -30,6 +30,9 @@ Route::get('config', [\App\Http\Controllers\StarterController::class, 'index'])
 Route::get('config2', \App\Livewire\Upr\ConfigCaddyfile::class)
     ->middleware(['auth'])
     ->name('config2');
+Route::get('cron', \App\Livewire\Upr\ConfigCron::class)
+    ->middleware(['auth'])
+    ->name('cron');
 
 Route::group(
     [
