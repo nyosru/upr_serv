@@ -70,7 +70,7 @@ jobs:
           username: ${{ env.VPS_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
           script: |
-            docker exec ${{ env.DOCKER_CONTAINER }} php composer.phar i --no-dev
+            docker exec ${{ env.DOCKER_CONTAINER }} composer i --no-dev
 
 
   sms_start:
