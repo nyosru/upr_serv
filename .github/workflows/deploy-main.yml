@@ -1,0 +1,108 @@
+name: Deploy bu docker
+
+
+env:
+  VPS_IP: 91.218.230.97
+  VPS_USERNAME: root
+  DIR: /home/upr_serv
+  DOCKER_CONTAINER: upr_serv
+  GIT_BRANCH: origin/main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: "refresh git & restart docker"
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.VPS_IP }}
+          username: ${{ env.VPS_USERNAME }}
+          key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
+          script: |
+            cd ${{ env.DIR }}
+            git fetch --all
+            git reset --hard ${{ env.GIT_BRANCH }}
+
+#  deploy_composer_stop:
+#    runs-on: ubuntu-latest
+#    needs: deploy
+#    steps:
+#      - uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ env.VPS_IP }}
+#          username: ${{ env.VPS_USERNAME }}
+#          key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
+#          script: |
+#            cd ${{ env.DIR }}
+#            docker-compose down --remove-orphans
+
+
+
+
+  deploy_composer:
+    runs-on: ubuntu-latest
+    needs: deploy
+##    needs: deploy
+    steps:
+#      - uses: appleboy/ssh-action@master
+#        with:
+#
+#          host: ${{ env.VPS_IP }}
+#          username: ${{ env.VPS_USERNAME }}
+#          key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
+#
+#          script: |
+#            cd ${{ env.DIR }}
+#            make prod
+
+
+      - name: "update composer migration"
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.VPS_IP }}
+          username: ${{ env.VPS_USERNAME }}
+          key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
+          script: |
+            docker exec ${{ env.DOCKER_CONTAINER }} php composer.phar i --no-dev
+
+
+  sms_start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telega
+        uses: appleboy/telegram-action@master
+        with:
+          # to: ${{ secrets.TELEGRAM_TO }}
+          to: 360209578, phpcat,
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🐥🐥🐥 ${{ github.repository }}
+            ${{ github.event_name }} > ${{ github.event.head_commit.message }}
+            👨🏻‍💻 ${{github.actor}} (${{ github.run_id }})
+            контейнер ${{ env.DOCKER_CONTAINER }}
+
+
+
+  sms_end:
+    runs-on: ubuntu-latest
+    # needs: [deploy_composer, deploy_npm]
+    needs: deploy_composer
+#    needs: deploy
+    steps:
+      - name: send telega
+        uses: appleboy/telegram-action@master
+        with:
+          # to: ${{ secrets.TELEGRAM_TO }}
+          to: 360209578, phpcat,
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🍀🍀🍀 ${{ github.repository }}
+            ${{ github.event_name }} > ${{ github.event.head_commit.message }}
+            👨🏻‍💻 ${{github.actor}} (${{ github.run_id }})

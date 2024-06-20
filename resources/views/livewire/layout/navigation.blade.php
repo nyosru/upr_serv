@@ -30,6 +30,9 @@ $logout = function (Logout $logout) {
                     <x-nav-link :href="route('config')" :active="request()->routeIs('config')" wire:navigate>
                         {{ __('caddyfile') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('cron')" :active="request()->routeIs('cron')" wire:navigate>
+                        {{ __('cron') }}
+                    </x-nav-link>
 {{--                    <x-nav-link :href="route('config2')" :active="request()->routeIs('config2')" wire:navigate>--}}
 {{--                        {{ __('config2') }}--}}
 {{--                    </x-nav-link>--}}
