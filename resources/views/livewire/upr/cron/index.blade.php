@@ -1,4 +1,15 @@
 <div>
+
+
+    <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 10000)" x-show="show">
+        @if (session()->has('message'))
+            <div id="alert" class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
+
+
     show cron config
 <br/>
 

@@ -21,15 +21,17 @@ class SaveFile extends Component
 // Имя контейнера
         $containerName = 'cron-service';
 // Команда для перезапуска контейнера
-        $command = "sudo docker restart " . escapeshellarg($containerName);
+        $command = "docker restart " . escapeshellarg($containerName);
 // Выполнение команды
         $output = shell_exec($command . " 2>&1");
 // Проверка и обработка результата
         if (strpos($output, 'Error') !== false) {
-            echo "Ошибка при перезапуске контейнера: <pre>$output</pre>";
+            $msg = "Ошибка при перезапуске контейнера: <pre>$output</pre>";
         } else {
-            echo "Контейнер успешно перезапущен: <pre>$output</pre>";
+            $msg = "Контейнер успешно перезапущен: <pre>$output</pre>";
         }
+        session()->flash('message', $msg);
+//        return redirect()->route('target.route');
 //        return;
         return $this->redirect('/cron');
     }
