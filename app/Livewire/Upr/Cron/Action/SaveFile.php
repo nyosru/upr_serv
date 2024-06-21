@@ -81,7 +81,7 @@ class SaveFile extends Component
 //        }
 
         $result = $this->restartContainer($containerName);
-        $msg .= '// '.$result->message;
+        $msg .= '// '.$result['message'];
 
         session()->flash( ( $result['code'] == 200 ) ? 'message' : 'error', $msg);
 //        return redirect()->route('target.route');
