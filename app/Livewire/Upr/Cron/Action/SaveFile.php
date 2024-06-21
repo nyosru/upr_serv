@@ -13,7 +13,7 @@ class SaveFile extends Component
     public function save()
     {
 //        $this->validate();
-        Storage::put('cron/my-crontab', $this->data_cron_file);
+        $msg = Storage::put('cron/my-crontab', $this->data_cron_file);
 //        Post::create(
 //            $this->form->all()
 //        );
@@ -26,9 +26,9 @@ class SaveFile extends Component
         $output = shell_exec($command . " 2>&1");
 // Проверка и обработка результата
         if (strpos($output, 'Error') !== false) {
-            $msg = "Ошибка при перезапуске контейнера: <pre>$output</pre>";
+            $msg .= "Ошибка при перезапуске контейнера: <pre>$output</pre>";
         } else {
-            $msg = "Контейнер успешно перезапущен: <pre>$output</pre>";
+            $msg .= "Контейнер успешно перезапущен: <pre>$output</pre>";
         }
         session()->flash('message', $msg);
 //        return redirect()->route('target.route');
