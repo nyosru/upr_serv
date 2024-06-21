@@ -10,7 +10,7 @@ class SaveFile extends Component
     public $data_cron_file = '';
 
 
-    public function restartContainer($container_name)
+    public function restartContainer($container_name): array
     {
 //        $container_name = 'cron-service';
         $flask_api_url = 'http://91.218.230.97:5000/restart';
@@ -52,8 +52,9 @@ class SaveFile extends Component
 
         curl_close($ch);
 
-        header('Content-Type: application/json');
-        return json_encode($result);
+//        header('Content-Type: application/json');
+//        return json_encode($result);
+        return $result;
     }
 
 
