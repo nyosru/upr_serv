@@ -79,10 +79,10 @@ class SaveFile extends Component
 //            $msg .= "Контейнер успешно перезапущен: <pre>$output</pre>";
 //        }
 
-        $msg .= '// '.
-        $this->restartContainer($containerName);
+        $result = json_encode($this->restartContainer($containerName));
+        $msg .= '// '.$result['message'];
 
-        session()->flash('message', $msg);
+        session()->flash( ( $result['code'] == 200 ) ? 'message' : 'error', $msg);
 //        return redirect()->route('target.route');
 //        return;
         return $this->redirect('/cron');
