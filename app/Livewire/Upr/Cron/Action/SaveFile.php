@@ -33,7 +33,7 @@ class SaveFile extends Component
         } else {
             echo "Контейнер успешно перезапущен: <pre>$output</pre>";
         }
-        return;
+//        return;
         return $this->redirect('/cron');
     }
 
