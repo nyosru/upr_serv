@@ -14,6 +14,16 @@
         @endif
     </div>
 
+<div class="bg-yellow-300 p-3 border-3 border-green-400" >
+    show cron config
+    <br/>
+
+    <livewire:upr.cron.action.save-file-is-array />
+
+</div>
+
+    <br/>
+
 
     show cron config
     <br/>
