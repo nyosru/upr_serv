@@ -235,9 +235,12 @@ class SaveFileIsArray extends Component
 
 //        $result = $this-
         $crontab_path = '/etc/cron.d/my-crontab';
-        $result = $this->restartContainer($containerName)
+        $result = $this->restartContainer($containerName);
+        $msg .= json_encode($result);
+        $msg .= '// ';
 //            $msg .= $result;
-        $result = $this->updateCrontab($containerName, $crontab_path);
+        $result2 = $this->updateCrontab($containerName, $crontab_path);
+        $msg .= json_encode($result2);
 //  $msg .= $result;
         $msg .= '// ' . $result['message'] ?? '';
 
