@@ -8,6 +8,7 @@ use Livewire\Component;
 class SaveFile extends Component
 {
     public $data_cron_file = '';
+    public $data_cron_file2 = '';
 
 
     public function copyFileInContainer($container_name,$source_path,$target_path): array
@@ -140,6 +141,7 @@ class SaveFile extends Component
     public function render()
     {
         $this->data_cron_file = Storage::get('cron/my-crontab');
+        $this->data_cron_file2 = Storage::get('cron2/my-crontab');
         return view('livewire.upr.cron.action.save-file');
     }
 }
