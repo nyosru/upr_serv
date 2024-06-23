@@ -54,9 +54,9 @@ class SaveFile extends Component
 
 //        header('Content-Type: application/json');
 //        return json_encode($result);
+
         return $result;
     }
-
 
     public function restartContainer($container_name): array
     {
