@@ -198,6 +198,13 @@ class SaveFile extends Component
 //        $permissions = 0755; // Укажите нужные права доступа
         $permissions = 0644; // Укажите нужные права доступа
 
+
+        if (file_exists($filename)) {
+            // Получение текущих прав доступа
+            $filePerms = substr(sprintf('%o', fileperms($filename)), -4);
+            echo "Текущие права доступа: $filePerms<br>";
+        }
+
 // Изменение прав доступа к файлу
         if(chmod($filename, $permissions)) {
             echo "Права доступа к файлу успешно изменены";
