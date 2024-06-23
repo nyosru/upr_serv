@@ -10,6 +10,54 @@ class SaveFile extends Component
     public $data_cron_file = '';
 
 
+    public function copyFileInContainer($container_name,$source_path,$target_path): array
+    {
+//        $container_name = 'cron-service';
+        $flask_api_url = 'http://91.218.230.97:5000/copy';
+
+        $data = [
+            'container_name' => $container_name
+        ];
+
+        $options = [
+            CURLOPT_URL => $flask_api_url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen(json_encode($data))
+            ]
+        ];
+
+        $ch = curl_init();
+        curl_setopt_array($ch, $options);
+
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if ($http_code == 200) {
+            $result = [
+                'status' => 'success',
+                'message' => 'Container restarted successfully.',
+                'code' => 200
+            ];
+        } else {
+            $result = [
+                'status' => 'error',
+                'message' => 'Failed to restart container.',
+                'code' => 500
+            ];
+        }
+
+        curl_close($ch);
+
+//        header('Content-Type: application/json');
+//        return json_encode($result);
+        return $result;
+    }
+
+
     public function restartContainer($container_name): array
     {
 //        $container_name = 'cron-service';
@@ -81,7 +129,7 @@ class SaveFile extends Component
 //        }
 
         $result = $this->restartContainer($containerName);
-        $msg .= '// '.$result['message'];
+        $msg .= '// '.$result['message'] ?? '';
 
         session()->flash( ( $result['code'] == 200 ) ? 'message' : 'error', $msg);
 //        return redirect()->route('target.route');
