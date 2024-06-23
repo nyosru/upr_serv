@@ -92,7 +92,7 @@ class Index extends Component
 //    parseCronString();
 
         $directory = 'cron';
-        $directory = 'cron2';
+        $directory2 = 'cron2';
         return view('livewire.upr.cron.index', [
             'files' => Storage::allFiles($directory),
             'files2' => Storage::allFiles($directory2)
