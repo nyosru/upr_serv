@@ -138,6 +138,37 @@ class SaveFile extends Component
         return $this->redirect('/cron');
     }
 
+    public function save2()
+    {
+//        $this->validate();
+        $msg = Storage::put('cron2/my-crontab', $this->data_cron_file2);
+        $msg .= ' - запись в файл /';
+//        Post::create(
+//            $this->form->all()
+//        );
+
+// Имя контейнера
+        $containerName = 'cron-service';
+//// Команда для перезапуска контейнера
+//        $command = "docker restart " . escapeshellarg($containerName);
+//// Выполнение команды
+//        $output = shell_exec($command . " 2>&1");
+//// Проверка и обработка результата
+//        if (strpos($output, 'Error') !== false) {
+//            $msg .= "Ошибка при перезапуске контейнера: <pre>$output</pre>";
+//        } else {
+//            $msg .= "Контейнер успешно перезапущен: <pre>$output</pre>";
+//        }
+
+        $result = $this->restartContainer($containerName);
+        $msg .= '// '.$result['message'] ?? '';
+
+        session()->flash( ( $result['code'] == 200 ) ? 'message' : 'error', $msg);
+//        return redirect()->route('target.route');
+//        return;
+        return $this->redirect('/cron');
+    }
+
     public function render()
     {
         $this->data_cron_file = Storage::get('cron/my-crontab');
