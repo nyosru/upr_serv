@@ -87,12 +87,15 @@ class Index extends Component
     {
         $this->data_cron_file = Storage::get('cron/my-crontab');
         $this->data_cron_file_ar = $this->readCronFile(Storage::path('cron/my-crontab'));
+        $this->data_cron_file_ar2 = $this->readCronFile(Storage::path('cron2/my-crontab'));
 
 //    parseCronString();
 
         $directory = 'cron';
+        $directory = 'cron2';
         return view('livewire.upr.cron.index', [
-            'files' => Storage::allFiles($directory)
+            'files' => Storage::allFiles($directory),
+            'files2' => Storage::allFiles($directory2)
 //            'data' => Docker::with('volumes','network','options')->get()
         ]);
     }

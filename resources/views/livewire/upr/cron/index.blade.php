@@ -18,11 +18,14 @@
     show cron config
     <br/>
 
-    <livewire:upr.cron.action.save-file :data_cron_file="$data_cron_file"/>
+    <livewire:upr.cron.action.save-file />
 
     <br/>
     files:
     <pre>{{print_r($files),true}}</pre>
+    <br/>
+    files2:
+    <pre>{{print_r($files2),true}}</pre>
     <br/>
     fi:
     <br/>
