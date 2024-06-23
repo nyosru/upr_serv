@@ -9,6 +9,9 @@ class SaveFileIsArray extends Component
 {
     public $data_cron_file = '';
     public $data_cron_file2 = '';
+    public $result1 = '';
+    public $result2 = '';
+    public $result3 = '';
 
 
     public function copyFileInContainer($container_name, $source_path, $target_path): array
@@ -245,7 +248,7 @@ class SaveFileIsArray extends Component
         $msg .= '// ' . $result['message'] ?? '';
 
         // Получаем содержимое буфера
-$msg .= ob_get_contents();
+$this->result2 .= ob_get_contents();
 
 // Завершаем буферизацию и очищаем буфер
 ob_end_clean();

@@ -16,6 +16,15 @@
 {{--    22--}}
 {{--    <br/>--}}
 
+    result: {{ $result ?? 'x' }}
+    <br/>
+    result1: {{ $result1 ?? 'x' }}
+    <br/>
+    result2: {{ $result2 ?? 'x' }}
+    <br/>
+    result3: {{ $result3 ?? 'x' }}
+    <br/>
+
     <form wire:submit="save2" >
     <textarea
         wire:model="data_cron_file2"
