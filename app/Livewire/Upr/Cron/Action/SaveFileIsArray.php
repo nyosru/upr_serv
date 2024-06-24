@@ -272,20 +272,23 @@ class SaveFileIsArray extends Component
         }
 
         ob_start();
-
+$msg = '';
 //// Получение и вывод прав доступа
 $chmod = $this->getChmod($filename);
-echo "Права доступа к файлу $filename: $chmod";
+//echo "Права доступа к файлу $filename: $chmod";
+$msg .= ' Права доступа к файлу '.$filename.':'. $chmod;
 
 
 // Изменение прав доступа к файлу
         if (chmod($filename, $permissions)) {
-            echo "Права доступа к файлу успешно изменены";
+//            echo "Права доступа к файлу успешно изменены";
+            $msg .= " // Права доступа к файлу успешно изменены";
         } else {
-            echo "Ошибка при изменении прав доступа к файлу";
+//            echo "Ошибка при изменении прав доступа к файлу";
+            $msg .=  " // Ошибка при изменении прав доступа к файлу";
         }
 
-        $msg = Storage::put('cron2/my-crontab', $this->data_cron_file2);
+        $msg .= Storage::put('cron2/my-crontab', $this->data_cron_file2);
         $msg .= ' - запись в файл /';
 //        Post::create(
 //            $this->form->all()
