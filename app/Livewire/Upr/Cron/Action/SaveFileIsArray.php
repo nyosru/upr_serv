@@ -15,7 +15,7 @@ class SaveFileIsArray extends Component
 
 
 // Функция для преобразования прав доступа в формат chmod
-    function getChmod($file)
+    function getChmod($file): string
     {
         $perms = fileperms($file);
 
@@ -326,8 +326,8 @@ ob_end_clean();
 
         session()->flash(($result['code'] == 200) ? 'message' : 'error', $msg);
 //        return redirect()->route('target.route');
-//        return;
-        return $this->redirect('/cron');
+        return;
+//        return $this->redirect('/cron');
     }
 
     public function render()
