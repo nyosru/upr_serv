@@ -274,7 +274,7 @@ class SaveFileIsArray extends Component
         ob_start();
 
 //// Получение и вывод прав доступа
-$chmod = getChmod($filename);
+$chmod = $this->getChmod($filename);
 echo "Права доступа к файлу $filename: $chmod";
 
 
