@@ -9,20 +9,55 @@ class GetApi extends Component
 {
     public $action_api = '';
     public $posts_list = [
-        'get_jobs_crontab' => [ 'name' => '' , 'method' => 'get' ],
-        'get_crontab' => [ 'name' => '' , 'method' => 'get' ],
-        'update-crontab' => [ 'name' => ''
-        //    , 'method' => 'get'
+        'get_jobs_crontab' => [
+            'name' => '',
+            'method' => 'get',
+            'value' => [
+                'container_name' => 'cron-service'
+            ]
         ],
-        'copy' => [ 'name' => '' ,
-//            'method' => 'get'
+        'get_crontab' => [
+            'name' => '',
+            'method' => 'get',
+            'value' => [
+                'container_name' => 'cron-service'
+            ]
         ],
-        'restart' => [ 'name' => ''
-            //, 'method' => 'get'
-            ],
-        'rebuild' => [ 'name' => ''
-            //, 'method' => 'get'
-            ],
+        'update-crontab' => [
+            'name' => ''
+            ,
+            'method' => 'post',
+            'value' => [
+                'container_name' => 'cron-service'
+            ]
+
+        ],
+        'copy' => [
+            'name' => '',
+            'method' => 'post',
+            'value' => [
+                'container_name' => 'cron-service'
+            ]
+
+        ],
+        'restart' => [
+            'name' => ''
+            ,
+            'method' => 'post',
+            'value' => [
+                'container_name' => 'cron-service'
+            ]
+
+        ],
+        'rebuild' => [
+            'name' => ''
+            ,
+            'method' => 'post',
+            'value' => [
+                'container_name' => 'cron-service'
+            ]
+
+        ],
     ];
     public $result = [];
     public $loading = false;
@@ -30,14 +65,11 @@ class GetApi extends Component
 
     public function apiGetNow()
     {
-
         $this->result = CronController::getApi(
-            'http://'.$_SERVER['HTTP_HOST'].':5001',
+            'http://' . $_SERVER['HTTP_HOST'] . ':5001',
             $this->action_api,
-            [
-                'container_name' => 'cron-service'
-            ],
-            ( !empty($this->posts_list[$this->action_api]['method']) && $this->posts_list[$this->action_api]['method'] == 'get' ? 'get' : 'post' )
+            $this->posts_list[$this->action_api]['value'],
+            (!empty($this->posts_list[$this->action_api]['method']) && $this->posts_list[$this->action_api]['method'] == 'get' ? 'get' : 'post')
         );
     }
 
