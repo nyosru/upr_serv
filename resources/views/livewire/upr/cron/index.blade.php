@@ -14,6 +14,12 @@
         @endif
     </div>
 
+<div class="bg-green-200 p-3 border-3 border-green-400" >
+
+    <livewire:upr.cron.action.get-api />
+
+</div>
+
 <div class="bg-yellow-300 p-3 border-3 border-green-400" >
     show cron config
     <br/>
