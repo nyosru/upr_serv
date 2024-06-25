@@ -49,7 +49,7 @@ class CronController extends Controller
             $result = [
                 'status' => 'success',
                 'message' => 'successfully.',
-                'response' => $response,
+                'response' => json_decode($response),
                 'code' => 200
             ];
         } else {
@@ -66,7 +66,7 @@ class CronController extends Controller
 //        return json_encode($result);
 
         $result['CURLOPT_URL']= $options[CURLOPT_URL];
-        $result['$response']= $response;
+//        $result['$response']= $response;
 //        $result['$response2']= $response['status'];
 
         return $result;
