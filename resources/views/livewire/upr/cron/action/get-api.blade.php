@@ -3,6 +3,12 @@
     <table>
         <tr>
             <td>
+                <select wire:model.live="action_api" >
+                    <option value="">действие</option>
+                    @foreach( $posts_list as $item => $ival )
+                    <option>{{$item}}</option>
+                        @endforeach
+                </select>
                 <button
                     class="bg-yellow-100 hover:bg-yellow-200 p-1 text-gray-400 hover:text-black mr-2"
                     wire:click="apiGetNow">apiGetNow
@@ -13,7 +19,9 @@
                 </div>
 
             </td>
-            <td>result:
+            <td>
+                action_api: {{$action_api}}
+                <br/>result:
                 <br/>
                 <pre>{{ print_r($result) }}</pre>
             </td>
