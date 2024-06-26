@@ -76,7 +76,7 @@ class GetApi extends Component
     public function apiGetNow()
     {
         if ($this->action_api == 'full_update_crontab') {
-            $this->posts_list['full_update_crontab']['value']['crontab_content'] = $this->data_config;
+            $this->posts_list[$this->action_api]['value']['crontab_content'] = $this->data_config;
         }
 
         $this->result = CronController::getApi(

@@ -11,13 +11,14 @@ class CronController extends Controller
      * Display a listing of the resource.
      */
     public static function getApi(
-        String $domain,
-        String $action,
-        Array $vars = [
-        'container_name' => ''
-    ], $type = 'post')
-    {
-        $flask_api_url = $domain.'/'.$action;
+        string $domain,
+        string $action,
+        array $vars = [
+            'container_name' => ''
+        ],
+        $type = 'post'
+    ) {
+        $flask_api_url = $domain . '/' . $action;
 
 //        $data = [
 //            'container_name' => $vars['container_name']
@@ -32,11 +33,11 @@ class CronController extends Controller
             ]
         ];
 
-        if( $type == 'post' ){
+        if ($type == 'post') {
             $options[CURLOPT_POST] = true;
             $options[CURLOPT_POSTFIELDS] = json_encode($vars);
-        } elseif( $type == 'get' ){
-            $options[CURLOPT_URL] .= '?'.http_build_query($vars);
+        } elseif ($type == 'get') {
+            $options[CURLOPT_URL] .= '?' . http_build_query($vars);
         }
 
         $ch = curl_init();
@@ -56,7 +57,14 @@ class CronController extends Controller
             $result = [
                 'status' => 'error',
                 'message' => 'Failed',
-                'code' => 500
+                'code' => 500,
+                'response' => json_decode($response),
+                'data_in' =>
+                    [
+                        '$domain' => $domain,
+                        '$action' => $action,
+                        '$vars' => $vars
+                    ]
             ];
         }
 
@@ -65,7 +73,7 @@ class CronController extends Controller
 //        header('Content-Type: application/json');
 //        return json_encode($result);
 
-        $result['CURLOPT_URL']= $options[CURLOPT_URL];
+        $result['CURLOPT_URL'] = $options[CURLOPT_URL];
 //        $result['$response']= $response;
 //        $result['$response2']= $response['status'];
 
