@@ -23,7 +23,10 @@
                 action_api: {{$action_api}}
                 <br/>result:
                 <br/>
-                <pre>{{ print_r($result) }}</pre>
+                <pre style="text-size:12px;">{{ print_r($result) }}</pre>
+                <textarea
+                    wire:model="data_cron_file2"
+                    rows="5" style="width:100%;"></textarea>
             </td>
         </tr>
     </table>
