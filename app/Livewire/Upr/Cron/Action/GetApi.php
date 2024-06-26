@@ -8,6 +8,7 @@ use Livewire\Component;
 class GetApi extends Component
 {
     public $action_api = '';
+    public $data_config = '';
     public $posts_list = [
 
         'full_update_crontab' => [
@@ -84,6 +85,7 @@ class GetApi extends Component
 
     public function render()
     {
+        $this->posts_list['full_update_crontab']['value']['crontab_content'] = $this->data_config;
         return view('livewire.upr.cron.action.get-api');
     }
 }
