@@ -9,6 +9,15 @@ class GetApi extends Component
 {
     public $action_api = '';
     public $posts_list = [
+
+        'full_update_crontab' => [
+            'name' => '',
+            'method' => 'post',
+            'value' => [
+                'container_name' => 'cron-service',
+                'crontab_content' => ''
+            ]
+        ],
         'get_jobs_crontab' => [
             'name' => '',
             'method' => 'get',
