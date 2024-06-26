@@ -75,6 +75,10 @@ class GetApi extends Component
 
     public function apiGetNow()
     {
+        if ($this->action_api == 'full_update_crontab') {
+            $this->posts_list['full_update_crontab']['value']['crontab_content'] = $this->data_config;
+        }
+
         $this->result = CronController::getApi(
             'http://' . $_SERVER['HTTP_HOST'] . ':5001',
             $this->action_api,
@@ -85,7 +89,6 @@ class GetApi extends Component
 
     public function render()
     {
-        $this->posts_list['full_update_crontab']['value']['crontab_content'] = $this->data_config;
         return view('livewire.upr.cron.action.get-api');
     }
 }

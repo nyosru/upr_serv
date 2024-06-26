@@ -25,7 +25,7 @@
                 <br/>
                 <pre style="text-size:12px;">{{ print_r($result) }}</pre>
                 <textarea
-                    wire:model="data_config"
+                    wire:model.live="data_config"
                     rows="5" style="width:100%;"></textarea>
             </td>
         </tr>
