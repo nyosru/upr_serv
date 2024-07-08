@@ -139,7 +139,7 @@ class GetApi extends Component
     {
 //        $response = DockerPythonAdapterController::get_containers($container_name);
         $response = DockerPythonAdapterController::get_containers('flask-api');
-        return $this->containers_list = $response['response']['containers'];
+        return $this->containers_list = $response['response']['containers'] ?? [];
 //        return $response;
     }
 
