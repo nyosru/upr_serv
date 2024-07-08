@@ -33,6 +33,7 @@
             }
         }
     </style>
+    @livewireStyles
 </head>
 <body class="font-sans antialiased">
 
@@ -52,6 +53,8 @@
     <main>
         {{ $slot }}
     </main>
+
 </div>
+@livewireScripts
 </body>
 </html>

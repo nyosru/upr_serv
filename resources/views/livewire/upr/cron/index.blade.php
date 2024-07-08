@@ -1,6 +1,5 @@
 <div>
 
-
     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 30000)" x-show="show">
         @if (session()->has('message'))
             <div id="alert" class="alert alert-success">
@@ -14,27 +13,34 @@
         @endif
     </div>
 
-<div class="bg-green-200 p-3 border-3 border-green-400" >
 
-    <livewire:upr.cron.action.get-api />
+    <div class="bg-orange-200 p-3 border-3 border-red-400">
+        {{--    @livewire('upr.cron.refresh-component')--}}
+        {{--    @livewire('upr.cron.refresh-cron-component')--}}
+        {{--    @livewire('upr.cron.action.get-api')--}}
+    </div>
 
-</div>
+    <div class="bg-green-200 p-3 border-3 border-green-400">
 
-<div class="bg-yellow-300 p-3 border-3 border-green-400" >
+        <livewire:upr.cron.action.get-api/>
+
+    </div>
+
+    <div class="bg-yellow-300 p-3 border-3 border-green-400">
+        show cron config
+        <br/>
+
+        <livewire:upr.cron.action.save-file-is-array/>
+
+    </div>
+
+    <br/>
+
+
     show cron config
     <br/>
 
-    <livewire:upr.cron.action.save-file-is-array />
-
-</div>
-
-    <br/>
-
-
-    show cron config
-    <br/>
-
-    <livewire:upr.cron.action.save-file />
+    <livewire:upr.cron.action.save-file/>
 
     <br/>
     files:
