@@ -290,9 +290,9 @@ class GetApi extends Component
                 }
 
                 $response[] = Storage::put($filePath, $this->crontab_new);
-
-
                 $response[] = date('Y-m-d H:i:s',filemtime($fullPath) );
+                $response[] = 'данные в файле';
+                $response[] = Storage::get($filePath);
 
                 $response[] = time() - $response[0];
 
