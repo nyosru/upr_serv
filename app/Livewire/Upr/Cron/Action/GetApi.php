@@ -277,17 +277,17 @@ class GetApi extends Component
 
                 $response[] = date('Y-m-d H:i:s',filemtime($fullPath) );
 
-// Изменение прав доступа к директории
-                chmod(dirname($fullPath), 0775);
-
-// Изменение прав доступа к файлу
-                if (file_exists($fullPath)) {
-                    chmod($fullPath, 0664);
-                } else {
-                    // Если файла нет, создаем его с нужными правами
-                    Storage::put($filePath, '');
-                    chmod($fullPath, 0664);
-                }
+//// Изменение прав доступа к директории
+//                chmod(dirname($fullPath), 0775);
+//
+//// Изменение прав доступа к файлу
+//                if (file_exists($fullPath)) {
+//                    chmod($fullPath, 0664);
+//                } else {
+//                    // Если файла нет, создаем его с нужными правами
+//                    Storage::put($filePath, '');
+//                    chmod($fullPath, 0664);
+//                }
 
                 $response[] = Storage::put($filePath, $this->crontab_new);
                 $response[] = date('Y-m-d H:i:s',filemtime($fullPath) );
